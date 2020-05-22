@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=nunito">
+    <title>Spotify</title>
+    <style>
+     
+    
+  body{
+ background-color: rgb(19,18,18);
+ font-family: 'nunito', serif;
+font-size: 1em;
+
+}
+    .main{
+        margin-left: 200px;
+    }
+
+    .main h1{
+        color:white;
+        margin-left:65px;
+        margin-bottom: 20px;
+    }        
+   .wrapper {
+    width: 100%;
+    align-items: stretch;
+    }
+    .main #anchorWrapper a:hover {
+    border-bottom: 3px solid green;     
+    color: rgba(241, 234, 234, 0.89);
+    text-decoration: none;
+    font-size: larger;
+} 
+.active{
+    border-bottom: 2px solid green;     
+    color: rgba(241, 234, 234, 0.89);
+    font-size: larger;
+}
+    #sidebar {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 90vh;
+    background: black;
+    color: #fff;
+    position:fixed;
+    
+}
+
+.footerSB{
+    min-height: 40px;
+    position: absolute;
+    bottom: 0;
+}  
+
+.footerSB > a{
+  color:grey;
+}
+
+.footerSB > a:hover{
+  text-decoration: none;
+  color:#fff;
+}
+
+
+    #sidebar .sidebar-header {
+    padding: 20px;
+    
+}
+
+    #sidebar ul.components {
+    padding: 20px 0;
+    
+}
+
+    #sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+    #sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+    #sidebar ul li a:hover {
+    color: rgba(241, 234, 234, 0.89);
+    text-decoration: none;
+
+}
+
+    #sidebar ul li> a, a[aria-expanded="true"] {
+    color:grey;
+    
+}
+.wrapper #sidebar .sideBarBottomBtn .bttn{
+    border-radius: 25px;
+    border: white 2px solid;
+    width: 120px;
+}
+#sidebar ul li a:hover {
+    color: rgba(241, 234, 234, 0.89);
+    font-size: larger;
+    border-left: 3px solid green;
+    text-decoration: none;
+}
+    ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    }
+
+    /* .card-deck {
+        height:180px;
+        width:200px;
+        
+    } */
+
+    .card {
+       
+        text-align: center;
+        background-color: rgb(19, 18, 18);
+        color: white;
+        position: relative; 
+            
+      
+    }
+    /* .card :hover{
+      transform: scale(2.5);
+    }  */
+
+    /* .card-img-top {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    } */
+
+    .card-text{
+      color:grey;
+    }
+    /* .podcastcard .col .card img:hover{
+      transform: scale(1.1);
+      width: 250px;
+    } */
+ 
+.infos-content {
+  padding-top: 1.8rem;
+}
+/* 
+.infos-content > span {
+  display: block;
+} */
+
+.card:hover .infos-container {
+  opacity: 1;
+  transform: translateY(5px);
+  font-size: larger;
+  font-weight:bolder;
+}
+.card:hover img{
+  /* transform: scale(1.1); */
+  width: 190px;
+}
+    .play-icon {
+  position: absolute;
+  color: white;
+  left: -200px;
+  bottom: 20px;
+  background-color: #4caf50;
+  padding: 0.9rem;
+  width: 50px;
+  border-radius: 40px;
+  height: 50px;
+  transform: translateX(0);
+  opacity: 0;
+  transition: opacity 0.3s ease 0.3s, transform 0.4s ease 0.1s;
+  animation: ourGradient 4s ease infinite;
+  z-index: 3;
+}
+.card:hover .play-icon {
+  opacity: 1;
+  transform: translateX(calc(200px + 15px + 0.9rem));
+}
+.play-icon i {
+  position: relative;
+  left: 1px;
+  top: -1px;
+}
+
+
+
+    footer{
+      background-color: rgb(53, 52, 52);
+      position:sticky;
+      left: 0;
+      bottom: 0;
+      max-width:100%;
+      max-height:auto;
+      height: 10vh;
+    }
+
+    footer .btn{
+      color:grey;
+    }
+    .container1{
+      justify-content: space-between;
+      font-size: 15px;
+      color:rgb(136, 136, 134);
+    }
+
+    .container1 img{
+      margin: 0;
+      position: relative;
+      top: 60%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+}
+    .slider:hover {
+      opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100px;
+      height: 5px;
+      border-radius: 5px;
+      background: grey;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .jumbo-bottom {
+      padding-top:50px;
+    }
+
+    .btn-md{
+      background-color: transparent;
+      border:none;
+      overflow: hidden;
+      color:rgb(212, 208, 205);
+      font-weight:bold;
+      font-size: 14px;
+      outline:none !important;
+    }
+    
+    .btn-sm{
+      background-color: transparent;
+      border:none;
+      color:grey;
+      outline:none !important;
+
+    }
+
+    .btn-md:hover{
+      color: white;
+      border-bottom: 3px solid green;
+    }
+
+    .dropdown-item{
+      color: grey;
+      text-align: left;
+    }
+
+
+    .dropdown-item:hover{
+      color:white;
+      background-color: transparent;
+    }
+    .p{
+      margin-top: 100px;
+    }
+
+    @media (max-width: 500px) {
+  #sidebar {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  #sidebar {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  footer {
+   height: auto;
+  }
+}
+@media (max-width: 1024px) {
+  .main > h1 {
+    font-size: 50px;
+  }
+}
+ /* @media (max-width: 1024px) {
+  .main .row {
+    height: 90vh;
+     min-height: 327px;
+     min-width: 400px;
+     max-height:400px;
+  } 
+}  */
+@media (max-width: 1024px) {
+  .main {
+    width: 100%;
+    height: 100%;
+   
+  } 
+} 
+
+
+@media (max-width:500px) {
+  .main {
+    margin-left: 0;
+    width: auto;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  main{
+    width: 700px;
+  }
+ }
+
+/* @media (min-width: 501px) {
+  .jumbotron .btn-sm {
+    display: none;
+  }
+  } */
+
+/* @media (max-width: 400px) {
+  .main {
+    margin-left: 0;
+  }
+} */
+</style>
+  </head>
+  <body>
+    <div class="wrapper">
+        
+        <nav id="sidebar"> 
+            <div class="sidebar-header">
+                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png" style="object-fit: cover; width:150px; ">
+            </div>
+    
+            <ul class="list-unstyled components">
+                <li>
+                     <a href="../ArtistPageResponsive.html"><i class="fas fa-home"></i> Home</a>
+                </li>
+               
+                <li>
+                    <a href="#"><i class="fas fa-search"></i> Search</a>
+                </li>
+                <li>
+                    <a href="../Album.html"><i class="fas fa-stream"></i> Your Library</a>
+                </li>
+            </ul>
+            <id class="footerSB">
+                <div class="row">
+                  <div class="col">
+                    <div class="sideBarBottomBtn d-flex flex-column">
+                      <button type="button" onclick="signup()" class="btn btn-primary btn-sm bttn mx-4" style="background-color: white; color: black;">SIGN UP</button>
+                      <button type="button" class="btn btn-primary btn-sm bttn mt-3 mx-4" style="background-color: grey; color: white;">LOG IN</button>
+                    </div>
+                    <div class="sideBarBottomAnchor d-flex flex-column">
+                        <span class="mx-4"><a href="#" style="color:white; font-size: 0.9em;">Cookie</a> || <a href="#"style="color:white; font-size: 0.9em;">Privacy policy</a></span> 
+                    </div>
+                  </div>
+                </div>
+            </id>
+        </nav>
+    
+    </div>
+
+    <div class = "main">
+      <div id="anchorWrapper" class="d-flex justify-content-center">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">TRENDING<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-3" href="podcast.html">PODCAST</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-3" href="Genre.html">MOODS AND GENRES</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-3" href="newrealeases.html">NEW RELEASES</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-3" href="discover.html">DISCOVER</a>
+              </li>
+            </ul>
+          </div>
+          </nav>
+        </div>
+        <h1>Welcome to Strivify</h1>
+        <div id="songContainer">
+
+            <div class="row mx-4 row-cols-2 row-cols-md-3 row-cols-lg-6 no-gutters"id= "cardContainer">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+
+      <div class="container1">
+        <div class="row">
+          <div class="col-3">
+            <img src="https://static.stereogum.com/uploads/2017/10/queen-1507300904-640x596.jpg" style="height:50px; padding-left:20px;">
+          </div>
+          <div class="col-6 mt-3" style="text-align: center;">
+            <button type="button" class="btn btn-sm"><i class="fa fa-random fa-lg"></i></button>
+            <button type="button" class="btn btn-sm">  <i class="fa fa-step-backward fa-lg"> </i></button>
+            <button type="button" class="btn btn-sm"> <i class="fa fa-play-circle fa-lg"> </i></button>
+            <button type="button" class="btn btn-sm"> <i class="fa fa-step-forward fa-lg"> </i></button>
+            <button type="button" class="btn btn-sm"> <i class="fa fa-redo-alt"> </i><br></button>
+            <button type="button" class="btn btn-sm"><i class="fa fa-random fa-lg"></i></button>
+            <div class="w3-light-grey w3-round-xlarge mt-3">
+              <div class="w3-container w3-round-xlarge" style="height:5px;"></div>
+            </div>
+          </div>
+          <div class="col mt-3 mr-2"style="text-align: right;">
+            <i class="fas fa-list fa-lg"></i>
+            <i class="fas fa-volume-up fa-lg"></i>
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">           
+          </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+    function loadData(artist) {
+            fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + artist, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+                    "x-rapidapi-key": "575de39080mshf1f9cab8127c63fp1bcad8jsn113d9f3f814b"
+                }
+            }) 
+                .then(response => response.json()) 
+                                                  
+                .then(songData => { 
+                  console.log(songData)
+                    let pageContent = document.querySelector('.main')
+                    let songContainer = document.querySelector('#songContainer')
+                    let albums = document.querySelector("#cardContainer")
+                    // let newRow = document.createElement("div")
+                    // newRow.classList.add("row")
+                    // newRow.classList.add("no-gutters")
+
+                    let songs = songData.data; 
+                    for(let i = 0; i < songs.length; i++){
+                        let song = songs[i] 
+                        albums.innerHTML +=
+                        `
+                        <div class="col-sm-3 col-md-2 card mx-2">
+                         
+                                <img src="${song.album.cover_xl}" class="card-img-top" alt="...">
+                                <div>
+                                    ${song.title}
+                                </div>
+                                <div>
+                                   <a href="AlbumPage.html?AlbumId=${song.artist.id}"> <p>${song.artist.name} </p> <br>
+                                    <p> ${song.album.title}</p></a> 
+                                </div>
+                           
+                        </div>
+                        `
+                       
+                    }
+                    //  pageContent.innerHTML+= `<h2>${artist}</h2>`
+
+                    // albums.innerHTML+= `<h2>${artist}</h2>`
+                    // albums.innerHTML += `<h2>${artist}</h2>`
+                    songContainer.appendChild(albums)
+                    pageContent.appendChild(songContainer)
+                    // pageContent.appendChild(albums)
+                })
+                .catch(err => { 
+                    console.log(err);
+                });
+        }
+    //   function signup (){
+    //     window.open("../Registration.html")
+    //   }
+      window.onload = function()
+      {
+          loadData("eminem")
+          loadData("blink 182")
+          loadData("metallica")
+      }
+    </script>
+
+    <script src="https://kit.fontawesome.com/5e49adb972.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
