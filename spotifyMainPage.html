@@ -364,7 +364,10 @@ font-size: 1em;
                 </li>
                
                 <li>
-                    <a href="#"><i class="fas fa-search"></i> Search</a>
+                  <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search" style="width:100px;">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form>
                 </li>
                 <li>
                     <a href="../Album.html"><i class="fas fa-stream"></i> Your Library</a>
@@ -501,14 +504,37 @@ font-size: 1em;
                     console.log(err);
                 });
         }
-    //   function signup (){
-    //     window.open("../Registration.html")
-    //   }
+    
+    const filterStuff = () => {
+            const filterSearch = document.querySelector("#search").value.toLowerCase()
+            let albums = document.querySelector("#cardContainer")
+            /* const Album = document.querySelector(".secCol") */
+            albums.innerHTML = "";
+            /* Album.innerHTML = ""; */
+            const filteredSongs = loadData.filter(song => song.title.toLowerCase().includes(filterSearch))
+            filteredSongs.forEach(song => {
+                albums.innerHTML += `
+                <div class="col-sm-3 col-md-2 card mx-2">
+                         
+                         <img src="${song.album.cover_xl}" class="card-img-top" alt="...">
+                         <div>
+                             ${song.title}
+                         </div>
+                         <div>
+                            <a href="AlbumPage.html?AlbumId=${song.artist.id}"> <p>${song.artist.name} </p> <br>
+                             <p> ${song.album.title}</p></a> 
+                         </div>
+                    
+                 </div> `
+            })
+           
+        }
       window.onload = function()
       {
           loadData("eminem")
           loadData("blink 182")
           loadData("metallica")
+
       }
     </script>
 
