@@ -147,10 +147,10 @@
 
     footer{
       background-color: rgb(37, 37, 37);
-      position:sticky;
+      position:fixed;
       height:8vh;
       left: 0;
-      bottom: 0;
+      bottom: 0px;
       width:100%;
     }
 
@@ -370,7 +370,7 @@
     <div class = "main">
 
       <input type="text" id="search" placeholder="searchMe!" autocomplete="off" onkeyup="filterStuff()">
-      <div id="AlbumList"></div>
+      
 
       
       <div class="jumbotron">
@@ -523,15 +523,17 @@ fetch("https://deezerdevs-deezer.p.rapidapi.com/artist/Queen", {
 
 filterStuff = () => {
             const filterSearch = document.querySelector("#search").value.toLowerCase()
-            const AlbumList = document.querySelector("#AlbumList")
-            AlbumList.innerHTML = "";
+            const cardContainer = document.querySelector("#cardContainer")
+            cardContainer.innerHTML = "";
 
             const filteredSongs = loadedSongs.filter(album => album.title.toLowerCase().includes(filterSearch))
 
             filteredSongs.forEach(currentSong => {
-                AlbumList.innerHTML += `
+                cardContainer.innerHTML += `
                 <div class="col-sm-3 col-md-2 card" >
-                        
+                  <a href="details.html?songId=${currentSong.id}">
+                         <img src="${currentSong.album.cover}">
+                         </a>
                        <div onclick="detailMe(${currentSong.album.id})"> ${currentSong.album.title} </div>
                      </div>
             `
