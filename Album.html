@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify</title>
+    <!-- Jquery -->
+    <script src="jquery-1.10.2.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
+    <!-- CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="Style-Spotify.css"> -->
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    /* background-color: #191919; */
+}
+
+.container-fluid{
+    background-color: #191919;
+    color: white;
+}
+/* sidebar */
+#sticky-sidebar {
+    min-width: 200px;
+    max-width: 387px;
+    min-height: 90vh;
+    background: black !important;
+    color: #fff;
+    position:fixed;
+    }
+.footerSB{
+    min-height: 40px;
+    position: absolute;
+    bottom: 0;
+}
+/* footer of whole page */
+.footer {
+    position: fixed;
+    max-height: 10vh;
+    bottom: 0;
+    width: 100%;
+    background-color:#323232;
+}
+
+.clearfix:after{
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0px;
+	clear: both;
+}
+
+.btn-submit{
+    background-color: green;
+    color: white;
+    border-radius: 40px;
+    height: 100%;
+    width: 100%;
+    min-width: 50px;  
+    max-width: 150px;
+}
+
+footer{
+    background-color: rgb(53, 52, 52);
+    position:fixed;
+    min-height: 10%;
+    bottom: 0;
+    width: 100%; 
+}
+footer .container1 .row .btnClass .btn{
+    background-color: rgb(53, 52, 52);
+    border: 0px;
+    }
+footer .container1 .row .secondbtnClass .btn{
+    background-color: rgb(53, 52, 52);
+    border: 0px;
+    }
+#anchorWrapper{
+    display: none !important;
+}
+       
+  /* Media Queries */  
+
+@media (max-width: 767.98px) {
+    #sticky-sidebar {
+    display: none;
+  }
+
+  footer{
+      display: none !important;
+  }
+ 
+  
+  #anchorWrapper{
+      display: flex !important;
+  }
+
+}
+
+@media (max-width: 991.98px) {
+.col-12 img{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    max-width: 600px !important;
+    max-height: 100%;
+}
+#sticky-sidebar {
+    display: none;
+  }
+#anchorWrapper{
+      display: flex !important;
+  }   
+}
+
+/* SeekBar */
+#seek-bar{
+    width: 250px;
+    height: 5px;
+    background-color:gray;
+    display: flex;
+    border-radius: 50px;
+    margin-left: 25px;
+    cursor: pointer;
+}
+#fill{
+    height: 5px;
+    background-color:royalblue;
+    border-radius: 20px;
+}
+#handle{
+    width: 8px;
+    height: 8px;
+    background-color:royalblue;
+    border-radius: 50%;
+    margin-left: -5px;
+    transform: scale(2);
+}
+
+    </style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- for sidebar -->
+            <div class="col col-md-2 px-0 no-gutter">
+                <div id="anchorWrapper" class="d-flex justify-content-center">
+                    <nav class="navbar navbar-expand-lg navbar-dark">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="list-unstyled components py-4">       
+                            <li>
+                                <a class="text-white p-4" href="#"><i class="fa fa-home pr-2" aria-hidden="true"></i> Home</a>
+                            </li>
+                        
+                            <li>
+                                <!-- <input type="text" id="search" placeholder="searchMe!" autocomplete="off" onkeyup="filterStuff()"> -->
+                            </li>
+                            <li>
+                                <a class="text-white p-4" href="#"><i class="fa fa-bars pr-2" aria-hidden="true"></i> Your Library</a>
+                            </li>
+                        </ul>
+                    </div>
+                    </nav>
+                </div>
+                <div class="bg-dark" id="sticky-sidebar">
+                    <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png" style="object-fit: cover; width:150px; ">
+                    <ul class="list-unstyled components py-4">       
+                        <li>
+                            <a class="text-white p-4" href="#"><i class="fa fa-home pr-2" aria-hidden="true"></i> Home</a>
+                        </li>
+                    
+                        <li class="m-5">
+                            <input type="text" id="search" placeholder="searchMe!" autocomplete="off" onkeyup="filterStuff()">
+                        </li>
+                        <li>
+                            <a class="text-white p-4" href="#"><i class="fa fa-bars pr-2" aria-hidden="true"></i> Your Library</a>
+                        </li>
+                    </ul>
+                    <id class="footerSB"> <a href="#" class="p-3"><i class="fa fa-download pr-2" aria-hidden="true"></i>Install App</a>
+                        <br> <h6 class="border-top ml-2"> <img src="/images/Diego.jpg" alt="" style="object-fit: cover; width:20px; border-radius: 50%;"> Diego 'Zeba' Benovaz</h6>
+                    </id>
+                </div>
+            </div>
+
+          <!-- for second column -->
+          
+         <div class="col-12 col-md-4 py-5 my-5">              
+            <div class="d-flex flex-column justify-content-center align-items-center secCol">
+                
+            </div>
+         </div>
+         <!-- for 3rd column -->
+            <div class="col-12 col-md-6 pr-5">
+                    <div class="d-flex flex-column thirdCol">
+
+                       
+                        
+                    </div>
+                        
+            </div>          
+         
+        </div>
+    </div>
+
+    <!-- For overall footer- whole page -->
+    
+    <footer>      
+        <div class="container1">
+        <!-- <audio src="./assets/music/beyonce.mp3" id="song"></audio> -->
+          <div class="row">
+            <div class="col">
+                <div class="row d-flex d-row">
+                    <div class="col-lg-4">
+                         <img src="https://static.stereogum.com/uploads/2017/10/queen-1507300904-640x596.jpg" id="thumbnail" style="height:50px; padding-left:20px;">
+                        </div>
+                        <div class="col-lg-4">
+                          <span class="songdetails" style="font-size: small; color: white;">Song for my father</span> <br>
+                          <span  class="songdetails" style="font-size: smaller; color: white;">Horace Silver</span>
+                           </div>
+                           <div class="col-lg-4">
+                            <button type="button" class="btn btn-info" style="background-color:rgb(53, 52, 52); border: 0px;"><i class="fa fa-heart"></i></button>
+                            <button type="button" class="btn btn-info" style="background-color:rgb(53, 52, 52); border: 0px;"><i class="fa fa-podcast"></i></button>
+                           </div>
+                </div>
+           </div>
+         
+            <div class="col-5 mt-3 btnClass" style="text-align: center;">
+                <div class="d-flex flex-column">
+                    <div>
+                    <button type="button" class="btn btn-info" id="shuffle"><i class="fa fa-random fa-lg"></i></button>
+                    <button type="button" class="btn btn-info" id="pre" onclick="pre()">  <i class="fa fa-step-backward fa-lg"> </i></button>
+                    <!-- <img src="spotifyAssets/playicon.png" width="50px" style="background-color: grey;"> -->
+                    <button type="button" class="btn btn-info" id="play" onclick=" playOrPauseSong();"> <i class="fa fa-play-circle fa-lg"> </i></button>
+                    <button type="button" class="btn btn-info" id="next" onclick="next()"> <i class="fa fa-step-forward fa-lg"> </i></button>
+                    <button type="button" class="btn btn-info"> <i class="fa fa-redo-alt"> </i><br></button>
+                    <button type="button" class="btn btn-info"><i class="fa fa-random fa-lg"></i></button>
+                    <div class="w3-light-grey w3-round-xlarge mt-1">
+                        <div class="w3-container w3-round-xlarge" style="height:5px;"></div>
+                    </div>
+                    </div>
+
+                    <div class="ml-5" id="seek-bar">
+                        <div id="fill"></div>
+                        <div id="handle"></div>
+                    </div>
+
+                </div>
+              
+            </div>
+            
+            <div class="col mt-3 mr-2 secondbtnClass" style="text-align: right;">
+              <button type="button" class="btn btn-info">  <i class="fa fa-list fa-lg"></i></button>
+              <button type="button" class="btn btn-info">  <i class="fa fa-volume-up fa-lg"></i></button>
+              <button type="button" class="btn btn-info">  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">  </button>           
+            </div>
+            </div>
+        </div>
+          </div>
+        </div>
+
+        
+      </footer>
+<!-- JS part -->
+<script>
+/* https://deezerdevs-deezer.p.rapidapi.com/album/{id} */
+
+window.onload = () => {
+            loadTracks("Queen")
+        }
+
+
+        let loadedSongs = []
+        
+
+        const loadTracks = album => {
+            fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + album, {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+                        "x-rapidapi-key": "575de39080mshf1f9cab8127c63fp1bcad8jsn113d9f3f814b"
+                    }
+                })
+                .then(response => response.json())
+                .then(json => {
+                    const Tracklist = document.querySelector(".thirdCol")
+                    const Album = document.querySelector(".secCol")
+                    /* const songName = document.querySelector("#songNames") */
+
+                    loadedSongs = json.data;
+                   /*  calculateDuration(loadedSongs) */
+
+                    /* const albums = loadedSongs.map(song => song.album) */
+                    /* const alb = loadedSongs.album[1]
+                    Album.innerHTML += `
+
+                        <div><img src="${alb.album.cover}" alt="" style="margin: auto; width: 100%; max-width: 300px; min-height: 100%;"></div>
+                        <div><h6 class="text-center py-4">${alb.album.title}<br>${alb.artist.name}</h6></div>
+                        <div class="pb-2"><small class="muted text-center">Queen</small></div>
+                        <div>
+                            <button class="btn btn-submit text-uppercase bg-success text-white px-5 text-center">Play</button></div>
+                            <div class="d-flex py-4">
+                                <button type="button" class="btn btn-info" style="background-color:rgb(19,18,18); border: 0px;"><i class="fa fa-heart"></i></button>
+                                <button type="button" class="btn btn-info" style="background-color:rgb(53, 52, 52); border: 0px;">  <i class="fa fa-bars"></i></button>
+                        </div> ` */
+
+
+                    //NAVIGATION
+                    loadedSongs.forEach(currentSong => {
+                        Tracklist.innerHTML += `
+
+                        <div class="p-2 w-100 d-flex justify-content-between">
+                            <ul class="list-unstyled">
+                                <li class="d-inline-flex"><i class="fa fa-music pr-2 " aria-hidden="true"></i></li>
+                                <li class="d-inline-flex current-song"> <a href="details.html?songId=${currentSong.id}">${currentSong.title} </a></li>
+                                <li class="current-song px-4"><small>${currentSong.album.title}</small></li>
+                            </ul>
+                            
+                            <div id="totalDuration"></div>
+                            <div class="row" id="details"></div>              
+                        </div> `
+                        Album.innerHTML += `   <div><img src="${currentSong.id.album.cover}" alt="" style="margin: auto; width: 100%; max-width: 300px; min-height: 100%;"></div>
+                                <div><h6 class="text-center py-4">${currentSong.album.title}<br>${currentSong.artist.name}</h6></div>
+                                
+                                <div>
+                                    <button class="btn btn-submit text-uppercase bg-success text-white px-5 text-center">Play</button></div>
+                                    <div class="d-flex py-4">
+                                        <button type="button" class="btn btn-info" style="background-color:rgb(19,18,18); border: 0px;"><i class="fa fa-heart"></i></button>
+                                        <button type="button" class="btn btn-info" style="background-color:rgb(53, 52, 52); border: 0px;">  <i class="fa fa-bars"></i></button>
+                                </div> ` 
+
+                        
+                    })
+                    calculateDuration(loadedSongs)
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+
+        
+
+ 
+        /* <div class="col-sm-3 col-md-2 card" >
+                        <a href="details.html?songId=${currentSong.id}">
+                         <img src="${currentSong.album.cover}">
+                         </a>
+                       <div onclick="detailMe(${currentSong.id})"> ${currentSong.title} </div>
+                     </div> */
+
+
+
+        const filterStuff = () => {
+            const filterSearch = document.querySelector("#search").value.toLowerCase()
+            const Tracklist = document.querySelector(".thirdCol")
+            /* const Album = document.querySelector(".secCol") */
+            Tracklist.innerHTML = "";
+            /* Album.innerHTML = ""; */
+
+            const filteredSongs = loadedSongs.filter(song => song.title.toLowerCase().includes(filterSearch))
+
+            filteredSongs.forEach(currentSong => {
+                Tracklist.innerHTML += `
+
+                        <div class="p-2 w-100 d-flex justify-content-between">
+                            <ul class="list-unstyled">
+                                <li class="d-inline-flex"><i class="fa fa-music pr-2 " aria-hidden="true"></i></li>
+                                <li class="d-inline-flex current-song"> <a href="details.html?songId=${currentSong.id}">${currentSong.title} </a></li>
+                                <li class="current-song px-4"><small>${currentSong.album.title}</small></li>
+                            </ul>
+                            
+                            <div class="p-2 flex-shrink-1 bd-highlight">5:30 </div>              
+                        </div> `
+
+           
+            })
+           /*  calculateDuration(filteredSongs) */
+        }
+
+        const detailMe = id => {
+            const details = document.querySelector("#details")
+            const selectedSong = loadedSongs.find(x => x.id == id)
+
+            const {
+                duration
+            } = selectedSong
+
+
+            details.innerHTML = `
+            <div> ${selectedSong.title} - ${formatDuration(duration)}
+                <img src="${selectedSong.album.cover}" >
+            </div>
+        `
+        }
+
+        const calculateDuration = (songs) => {
+            const totalDurationDiv = document.getElementById('totalDuration')
+            totalDurationDiv.innerHTML = `Total duration: ${formatDuration(songs.reduce((accumulator, currentItem) => accumulator +
+                        parseInt(
+                            currentItem.duration), 0))} minutes`
+        }
+
+        const formatDuration = duration => {
+
+            const hours = Math.floor(duration / 60 / 60)
+
+            const minutes = Math.floor(duration / 60) - (hours * 60)
+
+            const seconds = duration % 60
+
+            return formattedDuration =
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* let song1 = '/images/' + e.target.attributes[2].nodeValue + '.mp3'
+let songs = [song1,"./images/1.mp3","./images/1.mp3"];
+
+let fillBar = document.getElementById("fill");
+
+let song = new Audio();
+let currentSong = 0;    // it point to the current song
+
+window.onload = playSong;   // it will call the function playSong when window is load
+
+function playSong(){
+            
+            song.src = songs[currentSong];  //set the source of 0th song 
+            
+            songTitle.textContent = songs[currentSong]; // set the title of song
+            
+            song.play();    // play the song
+        }
+function playOrPauseSong(){
+            
+            if(song.paused){
+                song.play();
+                $("#play").attr("src");
+            }
+            else{
+                song.pause();
+                $("#play").attr("src");
+            }
+        }
+        
+song.addEventListener('timeupdate',function(){ 
+            
+            var position = song.currentTime / song.duration;
+            
+            fillBar.style.width = position * 100 +'%';
+        });
+
+
+function next(){
+            
+            currentSong++;
+            if(currentSong > 2){
+                currentSong = 0;
+            }
+            playSong();
+            $("#play img").attr("src","Pause.png");
+            $("#image img").attr("src",poster[currentSong]);
+            $("#bg img").attr("src",poster[currentSong]);
+        }
+    
+function pre(){
+            
+            currentSong--;
+            if(currentSong < 0){
+                currentSong = 2;
+            }
+            playSong();
+            $("#play img").attr("src","Pause.png");
+            $("#image img").attr("src",poster[currentSong]);
+            $("#bg img").attr("src",poster[currentSong]);
+        }
+
+function clickHandler(e){
+    console.log(e.target.attributes[2].nodeValue)
+    console.log('/images/' + e.target.attributes[2].nodeValue + '.mp3')
+
+}
+         */
+    /* let playing = true;
+function playPause(button){
+
+    var x = $('#playPause');
+    $(button).find('i').remove();
+    if ($(button).text().trim() == 'Play') {
+      $(button).html($('<i/>',{class:'fa fa-pause'})).append(' Pause');
+      thumbnail.style.transform = "scale(1.15)"
+      let songdetails = document.querySelectorAll('.songdetails')
+      songdetails.style.color="black";
+      x.fadeIn();
+     }
+     else {
+       $(button).html($('<i/>',{class:'fa fa-play-circle fa-lg'})).append(' Play');
+       thumbnail.style.transform = "scale(1)"
+       x.fadeOut();
+     }
+} */
+</script>
+   <!--  <script type="text/javascript" src="player.js"></script> -->
+
+
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
