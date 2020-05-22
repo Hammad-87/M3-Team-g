@@ -330,6 +330,7 @@
 
 
 
+
 </style>
   </head>
 
@@ -369,6 +370,7 @@
     <div class = "main">
 
       <input type="text" id="search" placeholder="searchMe!" autocomplete="off" onkeyup="filterStuff()">
+      <div id="AlbumList"></div>
 
       
       <div class="jumbotron">
@@ -519,19 +521,17 @@ fetch("https://deezerdevs-deezer.p.rapidapi.com/artist/Queen", {
   artistName.innerHTML=(`${js.name}`)
 })
 
-const filterStuff = () => {
+filterStuff = () => {
             const filterSearch = document.querySelector("#search").value.toLowerCase()
-            const cardContainer = document.querySelector("#cardContainer")
-            cardContainer.innerHTML = "";
+            const AlbumList = document.querySelector("#AlbumList")
+            AlbumList.innerHTML = "";
 
             const filteredSongs = loadedSongs.filter(album => album.title.toLowerCase().includes(filterSearch))
 
             filteredSongs.forEach(currentSong => {
-                cardContainer.innerHTML += `
+                AlbumList.innerHTML += `
                 <div class="col-sm-3 col-md-2 card" >
-                        <a href="details.html?albumId=${currentSong.album.id}">
-                         <img src="${currentSong.album.cover}">
-                         </a>
+                        
                        <div onclick="detailMe(${currentSong.album.id})"> ${currentSong.album.title} </div>
                      </div>
             `
