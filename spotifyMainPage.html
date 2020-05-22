@@ -365,7 +365,7 @@ font-size: 1em;
                
                 <li>
                   <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search" style="width:100px;">
+                    <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search" style="width:100px;" autocomplete="off" onkeyup="filterStuff()">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                   </form>
                 </li>
@@ -453,6 +453,7 @@ font-size: 1em;
       </div>
     </footer>
     <script>
+           let loadedSong = []
     function loadData(artist) {
             fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + artist, {
                 "method": "GET",
@@ -472,9 +473,10 @@ font-size: 1em;
                     // newRow.classList.add("row")
                     // newRow.classList.add("no-gutters")
 
-                    let songs = songData.data; 
-                    for(let i = 0; i < songs.length; i++){
-                        let song = songs[i] 
+                    // let songs = songData.data; 
+                    loadedSong = songData.data;
+                    for(let i = 0; i < loadedSong.length; i++){
+                        let song = loadedSong[i] 
                         albums.innerHTML +=
                         `
                         <div class="col-sm-3 col-md-2 card mx-2">
@@ -508,10 +510,9 @@ font-size: 1em;
     const filterStuff = () => {
             const filterSearch = document.querySelector("#search").value.toLowerCase()
             let albums = document.querySelector("#cardContainer")
-            /* const Album = document.querySelector(".secCol") */
             albums.innerHTML = "";
-            /* Album.innerHTML = ""; */
-            const filteredSongs = loadData.filter(song => song.title.toLowerCase().includes(filterSearch))
+           
+            const filteredSongs = loadedSong.filter(song => song.title.toLowerCase().includes(filterSearch))
             filteredSongs.forEach(song => {
                 albums.innerHTML += `
                 <div class="col-sm-3 col-md-2 card mx-2">
